@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Van Aubel Multidimensional Lab</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      background: #f8fafc;
+    }
+    html, body {
+      min-height: 100%;
+      margin: 0;
+    }
+    body {
+      box-sizing: border-box;
+      padding: clamp(8px, 2vw, 16px);
+      background: #f8fafc;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root, body {
+        background: #15191f;
+      }
+    }
+    #van-aubel-multidimensional-lab {
+      --background: #f8fafc;
+      --foreground: #18212f;
+      --card: #ffffff;
+      --muted: #e8edf3;
+      --muted-foreground: #5d6878;
+      --border: #cbd3df;
+      --input: #aeb8c7;
+      --primary: #2457c5;
+      --primary-foreground: #ffffff;
+      --viz-series-1: #1769c2;
+      --viz-series-2: #c54545;
+      --viz-series-3: #7452b8;
+      --viz-series-4: #21877f;
+      --font-size-base: clamp(13px, calc(11.5px + 0.25vw), 15px);
+      width: min(100%, 94vw, calc(100vh * 1.05));
+      width: min(100%, 94vw, calc(100dvh * 1.05));
+      max-width: 1100px;
+      min-width: 0;
+      margin-inline: auto;
+      color: var(--foreground);
+      font-size: var(--font-size-base);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      #van-aubel-multidimensional-lab {
+        --background: #15191f;
+        --foreground: #e8edf4;
+        --card: #1e242c;
+        --muted: #2b333d;
+        --muted-foreground: #aeb8c6;
+        --border: #3d4856;
+        --input: #596677;
+        --primary: #7da7ff;
+        --primary-foreground: #101827;
+        --viz-series-1: #69aaf2;
+        --viz-series-2: #f08b8b;
+        --viz-series-3: #b79be8;
+        --viz-series-4: #68c6bd;
+      }
+    }
+    #van-aubel-multidimensional-lab,
+    #van-aubel-multidimensional-lab * {
+      box-sizing: border-box;
+    }
+    #van-aubel-multidimensional-lab button,
+    #van-aubel-multidimensional-lab select,
+    #van-aubel-multidimensional-lab input {
+      font: inherit;
+    }
+    #van-aubel-multidimensional-lab .viz-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: clamp(6px, 1.2vw, 12px);
+    }
+    #van-aubel-multidimensional-lab .form-label {
+      display: grid;
+      gap: 4px;
+      color: var(--muted-foreground);
+      font-size: 12px;
+    }
+    #van-aubel-multidimensional-lab .form-select,
+    #van-aubel-multidimensional-lab .btn {
+      min-height: 34px;
+      border: 1px solid var(--input);
+      border-radius: 6px;
+      background: var(--card);
+      color: var(--foreground);
+    }
+    #van-aubel-multidimensional-lab .form-select {
+      padding: 5px 28px 5px 9px;
+    }
+    #van-aubel-multidimensional-lab .btn {
+      padding: 5px 11px;
+      cursor: pointer;
+    }
+    #van-aubel-multidimensional-lab .btn:hover {
+      border-color: var(--primary);
+    }
+    #van-aubel-multidimensional-lab .btn:focus-visible,
+    #van-aubel-multidimensional-lab .form-select:focus-visible,
+    #van-aubel-multidimensional-lab .form-range:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+    #van-aubel-multidimensional-lab .btn-primary {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: var(--primary-foreground);
+    }
+    #van-aubel-multidimensional-lab .form-range {
+      width: 100%;
+      accent-color: var(--primary);
+    }
+    #van-aubel-multidimensional-lab .viz-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    #van-aubel-multidimensional-lab .card {
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--card);
+    }
+    #van-aubel-multidimensional-lab .viz-stat {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+      padding: clamp(7px, 1.2vw, 11px);
+      font-variant-numeric: tabular-nums;
+    }
+    #van-aubel-multidimensional-lab .viz-stat-value {
+      overflow: hidden;
+      font-size: 16px;
+      font-weight: 600;
+      text-overflow: ellipsis;
+    }
+    #van-aubel-multidimensional-lab .text-muted {
+      color: var(--muted-foreground);
+    }
+    #van-aubel-multidimensional-lab .text-small {
+      font-size: 12px;
+    }
+    @media (max-width: 560px) {
+      #van-aubel-multidimensional-lab .viz-grid {
+        grid-template-columns: 1fr;
+      }
+      #van-aubel-multidimensional-lab .form-label,
+      #van-aubel-multidimensional-lab .form-select {
+        width: 100%;
+      }
+    }
+    #van-aubel-multidimensional-lab .va-hidden { display: none; }
+    #van-aubel-multidimensional-lab .va-mode-row {
+      margin-bottom: clamp(8px, 1.4vw, 14px);
+    }
+    #van-aubel-multidimensional-lab .va-stats {
+      margin: clamp(7px, 1.2vw, 12px) 0;
+    }
+    #van-aubel-multidimensional-lab .va-stat-context {
+      color: var(--muted-foreground);
+      white-space: nowrap;
+    }
+    #van-aubel-multidimensional-lab .va-plot {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 72 / 43;
+      color: var(--foreground);
+      touch-action: none;
+      user-select: none;
+    }
+    #van-aubel-multidimensional-lab .va-divider,
+    #van-aubel-multidimensional-lab .va-axis,
+    #van-aubel-multidimensional-lab .va-tick {
+      stroke: var(--border);
+      stroke-width: 1;
+      fill: none;
+    }
+    #van-aubel-multidimensional-lab .va-zero-line {
+      stroke: var(--muted-foreground);
+      stroke-width: 1;
+      fill: none;
+    }
+    #van-aubel-multidimensional-lab .va-original {
+      fill: color-mix(in srgb, var(--muted) 46%, transparent);
+      stroke: var(--foreground);
+      stroke-width: 2;
+    }
+    #van-aubel-multidimensional-lab .va-square {
+      fill: color-mix(in srgb, var(--viz-series-3) 10%, transparent);
+      stroke: color-mix(in srgb, var(--viz-series-3) 76%, var(--foreground));
+      stroke-width: 1.25;
+    }
+    #van-aubel-multidimensional-lab .va-pr-stroke {
+      stroke: var(--viz-series-1);
+    }
+    #van-aubel-multidimensional-lab .va-qs-stroke {
+      stroke: var(--viz-series-2);
+    }
+    #van-aubel-multidimensional-lab .va-vector {
+      fill: none;
+      stroke-width: 3;
+    }
+    #van-aubel-multidimensional-lab .va-point {
+      fill: var(--background);
+      stroke: var(--foreground);
+      stroke-width: 2;
+      cursor: grab;
+    }
+    #van-aubel-multidimensional-lab .va-point:active { cursor: grabbing; }
+    #van-aubel-multidimensional-lab .va-center {
+      fill: var(--card);
+      stroke: var(--muted-foreground);
+      stroke-width: 1.5;
+    }
+    #van-aubel-multidimensional-lab .va-quarter-arc {
+      fill: none;
+      stroke: var(--muted-foreground);
+      stroke-width: 1.5;
+    }
+    #van-aubel-multidimensional-lab .va-profile-pr {
+      fill: none;
+      stroke: var(--viz-series-1);
+      stroke-width: 2;
+    }
+    #van-aubel-multidimensional-lab .va-profile-match {
+      fill: none;
+      stroke: var(--viz-series-2);
+      stroke-width: 1.5;
+      stroke-dasharray: 5 4;
+    }
+    #van-aubel-multidimensional-lab .va-profile-circle {
+      fill: var(--background);
+      stroke: var(--viz-series-1);
+      stroke-width: 2;
+    }
+    #van-aubel-multidimensional-lab .va-profile-diamond {
+      fill: var(--viz-series-2);
+      stroke: var(--background);
+      stroke-width: 1;
+    }
+    #van-aubel-multidimensional-lab .va-projection-plane {
+      fill: color-mix(in srgb, var(--viz-series-4) 9%, transparent);
+      stroke: var(--border);
+      stroke-width: 1;
+    }
+    #van-aubel-multidimensional-lab .va-intrinsic-basis {
+      fill: none;
+      stroke: var(--muted-foreground);
+      stroke-width: 1.25;
+      stroke-dasharray: 4 4;
+    }
+    #van-aubel-multidimensional-lab .va-plot text {
+      fill: var(--foreground);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 400;
+      pointer-events: none;
+    }
+    #van-aubel-multidimensional-lab .va-plot .va-small-label {
+      fill: var(--muted-foreground);
+      font-size: 11px;
+    }
+    #van-aubel-multidimensional-lab .va-detail {
+      min-height: 1.4em;
+      margin-top: 6px;
+      color: var(--muted-foreground);
+      font-variant-numeric: tabular-nums;
+    }
+    #van-aubel-multidimensional-lab .va-seed-field { min-width: 170px; }
+    @media (max-width: 560px) {
+      #van-aubel-multidimensional-lab .va-seed-field { min-width: 100%; }
+    }
+    @media (max-height: 620px) and (min-width: 561px) {
+      #van-aubel-multidimensional-lab .viz-stat {
+        padding-block: 5px;
+      }
+      #van-aubel-multidimensional-lab .va-mode-row,
+      #van-aubel-multidimensional-lab .va-stats {
+        margin-block: 5px;
+      }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      #van-aubel-multidimensional-lab .va-profile-pr,
+      #van-aubel-multidimensional-lab .va-profile-match,
+      #van-aubel-multidimensional-lab .va-vector {
+        transition: d 160ms ease, x1 160ms ease, y1 160ms ease, x2 160ms ease, y2 160ms ease;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="van-aubel-multidimensional-lab">
+
+  <div class="viz-controls va-mode-row" role="group" aria-label="Experiment mode">
+    <button id="va-mode-planar" type="button" class="btn btn-primary" aria-pressed="true">2D construction</button>
+    <button id="va-mode-high" type="button" class="btn" aria-pressed="false">Higher dimensions</button>
+  </div>
+
+  <section id="va-planar-section" aria-label="Two-dimensional Van Aubel construction">
+    <div class="viz-controls">
+      <label class="form-label" for="va-planar-scenario">Configuration
+        <select id="va-planar-scenario" class="form-select">
+          <option value="general">General quadrilateral</option>
+          <option value="concave">Concave quadrilateral</option>
+          <option value="crossed">Crossed quadrilateral</option>
+          <option value="zero-edge">One zero-length edge</option>
+          <option value="collinear">Collinear points</option>
+          <option value="coincident">All points coincident</option>
+        </select>
+      </label>
+      <label class="form-label" for="va-planar-epsilon">Orientation
+        <select id="va-planar-epsilon" class="form-select">
+          <option value="-1">ε = −1</option>
+          <option value="1">ε = +1</option>
+        </select>
+      </label>
+      <button id="va-planar-reset" type="button" class="btn">Reset points</button>
+    </div>
+
+    <div class="viz-grid va-stats" aria-live="polite">
+      <div class="card viz-stat">
+        <span class="text-muted">Identity residual</span>
+        <span id="va-planar-residual" class="viz-stat-value"></span>
+        <span class="va-stat-context">‖PR − εJ(QS)‖</span>
+      </div>
+      <div class="card viz-stat">
+        <span class="text-muted">Length gap</span>
+        <span id="va-planar-length-gap" class="viz-stat-value"></span>
+        <span class="va-stat-context">|‖PR‖ − ‖QS‖|</span>
+      </div>
+      <div class="card viz-stat">
+        <span class="text-muted">Inner product</span>
+        <span id="va-planar-dot" class="viz-stat-value"></span>
+        <span class="va-stat-context">PR · QS</span>
+      </div>
+    </div>
+
+    <svg id="va-planar-svg" class="va-plot" viewBox="0 0 720 430" role="img" aria-labelledby="va-planar-title va-planar-desc">
+      <title id="va-planar-title">Interactive two-dimensional Van Aubel construction</title>
+      <desc id="va-planar-desc">Drag the four vertices. Squares and their centers update, while the two opposite-center vectors are compared at a common origin.</desc>
+      <defs>
+        <marker id="va-planar-pr-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="var(--viz-series-1)"></path>
+        </marker>
+        <marker id="va-planar-qs-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="var(--viz-series-2)"></path>
+        </marker>
+      </defs>
+      <line class="va-divider" x1="516" y1="18" x2="516" y2="412"></line>
+      <g id="va-planar-squares"></g>
+      <g id="va-planar-shape"></g>
+      <g id="va-planar-centers"></g>
+      <g id="va-planar-points"></g>
+      <g id="va-planar-inset"></g>
+    </svg>
+    <div id="va-planar-detail" class="va-detail text-small" aria-live="polite"></div>
+  </section>
+
+  <section id="va-high-section" class="va-hidden" aria-label="Higher-dimensional Van Aubel experiment">
+    <div class="viz-controls">
+      <label class="form-label" for="va-high-dimension">Dimension
+        <select id="va-high-dimension" class="form-select">
+          <option value="4">4</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+      </label>
+      <label class="form-label" for="va-high-scenario">Configuration
+        <select id="va-high-scenario" class="form-select">
+          <option value="general">General position</option>
+          <option value="zero-edge">One zero-length edge</option>
+          <option value="collinear">Collinear points</option>
+          <option value="coincident">All points coincident</option>
+        </select>
+      </label>
+      <label class="form-label" for="va-high-epsilon">Orientation
+        <select id="va-high-epsilon" class="form-select">
+          <option value="-1">ε = −1</option>
+          <option value="1">ε = +1</option>
+        </select>
+      </label>
+      <label class="form-label va-seed-field" for="va-high-seed">Sample <span id="va-high-seed-value">37</span>
+        <input id="va-high-seed" class="form-range" type="range" min="1" max="999" step="1" value="37">
+      </label>
+      <button id="va-high-next" type="button" class="btn">New sample</button>
+    </div>
+
+    <div class="viz-grid va-stats" aria-live="polite">
+      <div class="card viz-stat">
+        <span class="text-muted">Identity residual</span>
+        <span id="va-high-residual" class="viz-stat-value"></span>
+        <span class="va-stat-context">relative error</span>
+      </div>
+      <div class="card viz-stat">
+        <span class="text-muted">Length gap</span>
+        <span id="va-high-length-gap" class="viz-stat-value"></span>
+        <span class="va-stat-context">relative error</span>
+      </div>
+      <div class="card viz-stat">
+        <span class="text-muted">Orthogonality</span>
+        <span id="va-high-dot" class="viz-stat-value"></span>
+        <span class="va-stat-context">normalized |PR · QS|</span>
+      </div>
+    </div>
+
+    <svg id="va-high-svg" class="va-plot" viewBox="0 0 720 430" role="img" aria-labelledby="va-high-title va-high-desc">
+      <title id="va-high-title">Higher-dimensional component and fixed-coordinate projection comparison</title>
+      <desc id="va-high-desc">The left chart compares every component of PR with epsilon J of QS. The right chart projects PR, QS, and the intrinsic directions onto the first two fixed coordinates.</desc>
+      <defs>
+        <marker id="va-high-pr-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="var(--viz-series-1)"></path>
+        </marker>
+        <marker id="va-high-qs-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="var(--viz-series-2)"></path>
+        </marker>
+        <marker id="va-high-basis-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="var(--muted-foreground)"></path>
+        </marker>
+      </defs>
+      <line class="va-divider" x1="498" y1="18" x2="498" y2="412"></line>
+      <g id="va-high-profile"></g>
+      <g id="va-high-plane"></g>
+    </svg>
+    <div id="va-high-detail" class="va-detail text-small" aria-live="polite"></div>
+  </section>
+
+  <script>
+    (() => {
+      const root = document.getElementById('van-aubel-multidimensional-lab');
+      const $ = selector => root.querySelector(selector);
+      const add = (a, b) => a.map((x, i) => x + b[i]);
+      const sub = (a, b) => a.map((x, i) => x - b[i]);
+      const scale = (s, a) => a.map(x => s * x);
+      const dot = (a, b) => a.reduce((sum, x, i) => sum + x * b[i], 0);
+      const norm = a => Math.sqrt(Math.max(0, dot(a, a)));
+      const formatError = value => value === 0 ? '0' : value.toExponential(2);
+      const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
+      const planarJ = v => [-v[1], v[0]];
+      const planarCenter = (x, y, epsilon) => {
+        const u = sub(y, x);
+        return add(x, scale(0.5, add(u, scale(epsilon, planarJ(u)))));
+      };
+
+      const modePlanar = $('#va-mode-planar');
+      const modeHigh = $('#va-mode-high');
+      const planarSection = $('#va-planar-section');
+      const highSection = $('#va-high-section');
+
+      function setMode(mode) {
+        const planar = mode === 'planar';
+        planarSection.classList.toggle('va-hidden', !planar);
+        highSection.classList.toggle('va-hidden', planar);
+        modePlanar.classList.toggle('btn-primary', planar);
+        modeHigh.classList.toggle('btn-primary', !planar);
+        modePlanar.setAttribute('aria-pressed', String(planar));
+        modeHigh.setAttribute('aria-pressed', String(!planar));
+      }
+
+      modePlanar.addEventListener('click', () => setMode('planar'));
+      modeHigh.addEventListener('click', () => setMode('high'));
+
+      const planarScenarios = {
+        general: { A: [-2.7, -1.1], B: [1.25, -1.45], C: [2.45, 1.0], D: [-1.35, 1.85] },
+        concave: { A: [-2.7, -1.3], B: [2.0, -1.15], C: [-0.15, 0.0], D: [-1.45, 2.0] },
+        crossed: { A: [-2.6, -1.5], B: [2.2, 1.35], C: [2.25, -1.35], D: [-2.0, 1.5] },
+        'zero-edge': { A: [-1.8, -1.0], B: [-1.8, -1.0], C: [2.25, 0.0], D: [-0.6, 2.1] },
+        collinear: { A: [-3.0, -1.2], B: [-1.0, -0.4], C: [1.2, 0.48], D: [3.0, 1.2] },
+        coincident: { A: [0, 0], B: [0, 0], C: [0, 0], D: [0, 0] }
+      };
+      const planarOrder = ['A', 'B', 'C', 'D'];
+      const centerNames = ['P', 'Q', 'R', 'S'];
+      let planarPoints = {};
+      let dragging = null;
+      const planarSvg = $('#va-planar-svg');
+      const planarOrigin = [258, 214];
+      const planarScale = 40;
+      const toScreen = p => [planarOrigin[0] + planarScale * p[0], planarOrigin[1] - planarScale * p[1]];
+      const pointsAttribute = vertices => vertices.map(p => toScreen(p).map(x => x.toFixed(2)).join(',')).join(' ');
+
+      function resetPlanar() {
+        const scenario = $('#va-planar-scenario').value;
+        planarPoints = Object.fromEntries(
+          planarOrder.map(name => [name, [...planarScenarios[scenario][name]]])
+        );
+        drawPlanar();
+      }
+
+      function drawPlanar() {
+        const epsilon = Number($('#va-planar-epsilon').value);
+        const centers = planarOrder.map((name, i) =>
+          planarCenter(planarPoints[name], planarPoints[planarOrder[(i + 1) % 4]], epsilon)
+        );
+
+        $('#va-planar-squares').innerHTML = planarOrder.map((name, i) => {
+          const x = planarPoints[name];
+          const y = planarPoints[planarOrder[(i + 1) % 4]];
+          const shift = scale(epsilon, planarJ(sub(y, x)));
+          return `<polygon class="va-square" points="${pointsAttribute([x, y, add(y, shift), add(x, shift)])}"></polygon>`;
+        }).join('');
+
+        const pScreen = centers.map(toScreen);
+        $('#va-planar-shape').innerHTML = `
+          <polygon class="va-original" points="${pointsAttribute(planarOrder.map(name => planarPoints[name]))}"></polygon>
+          <line class="va-vector va-pr-stroke" x1="${pScreen[0][0]}" y1="${pScreen[0][1]}" x2="${pScreen[2][0]}" y2="${pScreen[2][1]}"></line>
+          <line class="va-vector va-qs-stroke" x1="${pScreen[1][0]}" y1="${pScreen[1][1]}" x2="${pScreen[3][0]}" y2="${pScreen[3][1]}"></line>`;
+
+        $('#va-planar-centers').innerHTML = centers.map((center, i) => {
+          const p = toScreen(center);
+          return `<circle class="va-center" cx="${p[0]}" cy="${p[1]}" r="4"></circle>
+                  <text x="${p[0] + 7}" y="${p[1] - 7}">${centerNames[i]}</text>`;
+        }).join('');
+
+        $('#va-planar-points').innerHTML = planarOrder.map(name => {
+          const p = toScreen(planarPoints[name]);
+          return `<circle class="va-point" data-planar-point="${name}" cx="${p[0]}" cy="${p[1]}" r="8"></circle>
+                  <text x="${p[0] + 10}" y="${p[1] + 4}">${name}</text>`;
+        }).join('');
+
+        const pr = sub(centers[2], centers[0]);
+        const qs = sub(centers[3], centers[1]);
+        const matched = scale(epsilon, planarJ(qs));
+        const residual = norm(sub(pr, matched));
+        const lengthGap = Math.abs(norm(pr) - norm(qs));
+        const innerProduct = dot(pr, qs);
+        $('#va-planar-residual').textContent = formatError(residual);
+        $('#va-planar-length-gap').textContent = formatError(lengthGap);
+        $('#va-planar-dot').textContent = formatError(innerProduct);
+
+        const insetOrigin = [617, 218];
+        const arrowScale = 76 / Math.max(norm(pr), norm(qs), 1e-9);
+        const prEnd = [insetOrigin[0] + arrowScale * pr[0], insetOrigin[1] - arrowScale * pr[1]];
+        const qsEnd = [insetOrigin[0] + arrowScale * qs[0], insetOrigin[1] - arrowScale * qs[1]];
+        const qsUnit = norm(qs) > 1e-12 ? [qs[0] / norm(qs), -qs[1] / norm(qs)] : [1, 0];
+        const prUnit = norm(pr) > 1e-12 ? [pr[0] / norm(pr), -pr[1] / norm(pr)] : [0, -epsilon];
+        const arcStart = [insetOrigin[0] + 30 * qsUnit[0], insetOrigin[1] + 30 * qsUnit[1]];
+        const arcEnd = [insetOrigin[0] + 30 * prUnit[0], insetOrigin[1] + 30 * prUnit[1]];
+        const sweep = epsilon === 1 ? 0 : 1;
+        const degenerate = norm(pr) < 1e-12 && norm(qs) < 1e-12;
+
+        $('#va-planar-inset').innerHTML = `
+          <text x="535" y="42">Vectors at a common origin</text>
+          ${degenerate ? `
+            <circle cx="${insetOrigin[0]}" cy="${insetOrigin[1]}" r="5" fill="var(--foreground)"></circle>
+            <text class="va-small-label" x="548" y="254">Both vectors are zero</text>` : `
+            <line class="va-vector va-qs-stroke" x1="${insetOrigin[0]}" y1="${insetOrigin[1]}" x2="${qsEnd[0]}" y2="${qsEnd[1]}" marker-end="url(#va-planar-qs-arrow)"></line>
+            <line class="va-vector va-pr-stroke" x1="${insetOrigin[0]}" y1="${insetOrigin[1]}" x2="${prEnd[0]}" y2="${prEnd[1]}" marker-end="url(#va-planar-pr-arrow)"></line>
+            <path class="va-quarter-arc" d="M ${arcStart[0]} ${arcStart[1]} A 30 30 0 0 ${sweep} ${arcEnd[0]} ${arcEnd[1]}"></path>
+            <circle cx="${insetOrigin[0]}" cy="${insetOrigin[1]}" r="3" fill="var(--foreground)"></circle>`}
+          <text x="537" y="350">PR</text>
+          <line class="va-pr-stroke" x1="563" y1="346" x2="588" y2="346" stroke-width="3"></line>
+          <text x="615" y="350">QS</text>
+          <line class="va-qs-stroke" x1="643" y1="346" x2="668" y2="346" stroke-width="3"></line>
+          <text class="va-small-label" x="537" y="381">PR = εJ(QS)</text>
+          <text class="va-small-label" x="537" y="401">equal length · orthogonal</text>`;
+
+        let edgeLengthGap = 0;
+        let edgeDot = 0;
+        planarOrder.forEach((name, i) => {
+          const u = sub(planarPoints[planarOrder[(i + 1) % 4]], planarPoints[name]);
+          edgeLengthGap = Math.max(edgeLengthGap, Math.abs(norm(u) - norm(planarJ(u))));
+          edgeDot = Math.max(edgeDot, Math.abs(dot(u, planarJ(u))));
+        });
+        $('#va-planar-detail').textContent = `Drag A–D. Local-square checks: max length gap ${formatError(edgeLengthGap)}; max |u · Ju| ${formatError(edgeDot)}.`;
+      }
+
+      $('#va-planar-scenario').addEventListener('change', resetPlanar);
+      $('#va-planar-epsilon').addEventListener('change', drawPlanar);
+      $('#va-planar-reset').addEventListener('click', resetPlanar);
+      planarSvg.addEventListener('pointerdown', event => {
+        const target = event.target.closest('[data-planar-point]');
+        if (!target) return;
+        dragging = target.dataset.planarPoint;
+        planarSvg.setPointerCapture(event.pointerId);
+      });
+      planarSvg.addEventListener('pointermove', event => {
+        if (!dragging) return;
+        const rect = planarSvg.getBoundingClientRect();
+        const sx = (event.clientX - rect.left) * 720 / rect.width;
+        const sy = (event.clientY - rect.top) * 430 / rect.height;
+        planarPoints[dragging] = [
+          clamp((sx - planarOrigin[0]) / planarScale, -4.8, 4.8),
+          clamp((planarOrigin[1] - sy) / planarScale, -4.4, 4.4)
+        ];
+        drawPlanar();
+      });
+      const endDrag = event => {
+        if (dragging && planarSvg.hasPointerCapture(event.pointerId)) {
+          planarSvg.releasePointerCapture(event.pointerId);
+        }
+        dragging = null;
+      };
+      planarSvg.addEventListener('pointerup', endDrag);
+      planarSvg.addEventListener('pointercancel', endDrag);
+
+      function mulberry32(seed) {
+        return function random() {
+          let t = seed += 0x6D2B79F5;
+          t = Math.imul(t ^ t >>> 15, t | 1);
+          t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+          return ((t ^ t >>> 14) >>> 0) / 4294967296;
+        };
+      }
+
+      function gaussian(random) {
+        const u = Math.max(random(), 1e-12);
+        const v = random();
+        return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+      }
+
+      function orthogonalColumns(dimension, random) {
+        const columns = [];
+        for (let k = 0; k < dimension; k += 1) {
+          let v = Array.from({ length: dimension }, () => gaussian(random));
+          for (const q of columns) v = sub(v, scale(dot(v, q), q));
+          for (const q of columns) v = sub(v, scale(dot(v, q), q));
+          let length = norm(v);
+          if (length < 1e-10) {
+            v = Array.from({ length: dimension }, (_, i) => i === k ? 1 : 0);
+            for (const q of columns) v = sub(v, scale(dot(v, q), q));
+            length = norm(v);
+          }
+          columns.push(scale(1 / length, v));
+        }
+        return columns;
+      }
+
+      function makeComplexStructure(dimension, random) {
+        const q = orthogonalColumns(dimension, random);
+        return vector => {
+          const coordinates = q.map(column => dot(column, vector));
+          const rotated = Array(dimension).fill(0);
+          for (let i = 0; i < dimension; i += 2) {
+            rotated[i] = -coordinates[i + 1];
+            rotated[i + 1] = coordinates[i];
+          }
+          const result = Array(dimension).fill(0);
+          q.forEach((column, j) => {
+            for (let i = 0; i < dimension; i += 1) result[i] += rotated[j] * column[i];
+          });
+          return result;
+        };
+      }
+
+      function highPoints(dimension, scenario, random) {
+        const randomVector = () => Array.from({ length: dimension }, () => gaussian(random));
+        const a = randomVector();
+        if (scenario === 'coincident') return [a, [...a], [...a], [...a]];
+        if (scenario === 'zero-edge') return [a, [...a], randomVector(), randomVector()];
+        if (scenario === 'collinear') {
+          const direction = randomVector();
+          return [-2.2, -0.4, 1.1, 3.0].map(t => add(a, scale(t, direction)));
+        }
+        return [a, randomVector(), randomVector(), randomVector()];
+      }
+
+      function diamondPath(x, y, radius) {
+        return `M ${x} ${y - radius} L ${x + radius} ${y} L ${x} ${y + radius} L ${x - radius} ${y} Z`;
+      }
+
+      function drawHigh() {
+        const dimension = Number($('#va-high-dimension').value);
+        const scenario = $('#va-high-scenario').value;
+        const epsilon = Number($('#va-high-epsilon').value);
+        const seed = Number($('#va-high-seed').value);
+        $('#va-high-seed-value').textContent = String(seed);
+
+        const random = mulberry32(seed * 1009 + dimension * 9176);
+        const applyJ = makeComplexStructure(dimension, random);
+        const points = highPoints(dimension, scenario, random);
+        const center = (x, y) => {
+          const u = sub(y, x);
+          return add(x, scale(0.5, add(u, scale(epsilon, applyJ(u)))));
+        };
+        const [a, b, c, d] = points;
+        const p = center(a, b);
+        const q = center(b, c);
+        const r = center(c, d);
+        const s = center(d, a);
+        const pr = sub(r, p);
+        const qs = sub(s, q);
+        const matched = scale(epsilon, applyJ(qs));
+        const residual = norm(sub(pr, matched));
+        const vectorScale = 1 + norm(pr) + norm(qs);
+        const relativeResidual = residual / vectorScale;
+        const relativeLengthGap = Math.abs(norm(pr) - norm(qs)) / vectorScale;
+        const normalizedDot = Math.abs(dot(pr, qs)) / (1 + norm(pr) * norm(qs));
+
+        $('#va-high-residual').textContent = formatError(relativeResidual);
+        $('#va-high-length-gap').textContent = formatError(relativeLengthGap);
+        $('#va-high-dot').textContent = formatError(normalizedDot);
+
+        const xLeft = 54;
+        const xRight = 462;
+        const yTop = 77;
+        const yBottom = 355;
+        const yMid = (yTop + yBottom) / 2;
+        const maxAbs = Math.max(1e-9, ...pr.map(Math.abs), ...matched.map(Math.abs));
+        const xFor = i => dimension === 1 ? (xLeft + xRight) / 2 : xLeft + (xRight - xLeft) * i / (dimension - 1);
+        const yFor = value => yMid - (yBottom - yTop) * 0.44 * value / maxAbs;
+        const prPath = pr.map((value, i) => `${i === 0 ? 'M' : 'L'} ${xFor(i)} ${yFor(value)}`).join(' ');
+        const matchPath = matched.map((value, i) => `${i === 0 ? 'M' : 'L'} ${xFor(i)} ${yFor(value)}`).join(' ');
+        const labelStep = dimension <= 10 ? 1 : 2;
+
+        let profile = `
+          <text x="54" y="35">All ${dimension} components</text>
+          <line class="va-axis" x1="${xLeft}" y1="${yTop}" x2="${xLeft}" y2="${yBottom}"></line>
+          <line class="va-zero-line" x1="${xLeft}" y1="${yMid}" x2="${xRight}" y2="${yMid}"></line>
+          <text class="va-small-label" x="${xLeft}" y="${yTop - 9}">+${maxAbs.toPrecision(3)}</text>
+          <text class="va-small-label" x="${xLeft}" y="${yBottom + 18}">−${maxAbs.toPrecision(3)}</text>
+          <path class="va-profile-pr" d="${prPath}"></path>
+          <path class="va-profile-match" d="${matchPath}"></path>`;
+
+        for (let i = 0; i < dimension; i += 1) {
+          const x = xFor(i);
+          const yp = yFor(pr[i]);
+          const ym = yFor(matched[i]);
+          profile += `<circle class="va-profile-circle" cx="${x}" cy="${yp}" r="4"></circle>`;
+          profile += `<path class="va-profile-diamond" d="${diamondPath(x, ym, 2.8)}"></path>`;
+          if (i % labelStep === 0 || i === dimension - 1) {
+            profile += `<line class="va-tick" x1="${x}" y1="${yBottom}" x2="${x}" y2="${yBottom + 5}"></line>`;
+            profile += `<text class="va-small-label" text-anchor="middle" x="${x}" y="${yBottom + 20}">${i + 1}</text>`;
+          }
+        }
+        profile += `
+          <circle class="va-profile-circle" cx="76" cy="399" r="4"></circle>
+          <text class="va-small-label" x="87" y="403">PR</text>
+          <path class="va-profile-diamond" d="${diamondPath(146, 399, 3)}"></path>
+          <text class="va-small-label" x="157" y="403">εJ(QS)</text>`;
+        $('#va-high-profile').innerHTML = profile;
+
+        const planeOrigin = [612, 220];
+        const projectionRadius = 62;
+        const basisRadius = 78;
+        const projectionTolerance = 1e-12;
+        const qsProjection = [qs[0], qs[1]];
+        const prProjection = [pr[0], pr[1]];
+        const maximumProjectionNorm = Math.max(norm(qsProjection), norm(prProjection));
+        const projectionScale = maximumProjectionNorm > projectionTolerance
+          ? projectionRadius / maximumProjectionNorm
+          : 0;
+        const projectionEnd = vector => [
+          planeOrigin[0] + projectionScale * vector[0],
+          planeOrigin[1] - projectionScale * vector[1]
+        ];
+        const qsEnd = projectionEnd(qsProjection);
+        const prEnd = projectionEnd(prProjection);
+
+        const qsNorm = norm(qs);
+        const e1 = qsNorm > projectionTolerance
+          ? scale(1 / qsNorm, qs)
+          : Array(dimension).fill(0);
+        const e2 = applyJ(e1);
+        const intrinsicDirectionEnd = vector => {
+          const projected = [vector[0], vector[1]];
+          const projectedNorm = norm(projected);
+          return projectedNorm > projectionTolerance
+            ? [
+                planeOrigin[0] + basisRadius * projected[0] / projectedNorm,
+                planeOrigin[1] - basisRadius * projected[1] / projectedNorm
+              ]
+            : null;
+        };
+        const e1End = intrinsicDirectionEnd(e1);
+        const e2End = intrinsicDirectionEnd(e2);
+        const basisMarkup = [e1End, e2End]
+          .filter(Boolean)
+          .map(end => `<line class="va-intrinsic-basis" x1="${planeOrigin[0]}" y1="${planeOrigin[1]}" x2="${end[0]}" y2="${end[1]}" marker-end="url(#va-high-basis-arrow)"></line>`)
+          .join('');
+        const vectorMarkup = [
+          { vector: qsProjection, end: qsEnd, className: 'va-qs-stroke', marker: 'va-high-qs-arrow' },
+          { vector: prProjection, end: prEnd, className: 'va-pr-stroke', marker: 'va-high-pr-arrow' }
+        ]
+          .filter(item => norm(item.vector) > projectionTolerance)
+          .map(item => `<line class="va-vector ${item.className}" x1="${planeOrigin[0]}" y1="${planeOrigin[1]}" x2="${item.end[0]}" y2="${item.end[1]}" marker-end="url(#${item.marker})"></line>`)
+          .join('');
+        const bothVectorsVanish = qsNorm <= projectionTolerance && norm(pr) <= projectionTolerance;
+        const projectionVanishes = maximumProjectionNorm <= projectionTolerance;
+
+        $('#va-high-plane').innerHTML = `
+          <text x="520" y="35">Fixed projection (1–2)</text>
+          <rect class="va-projection-plane" x="525" y="90" width="174" height="260" rx="0"></rect>
+          <line class="va-axis" x1="540" y1="${planeOrigin[1]}" x2="686" y2="${planeOrigin[1]}"></line>
+          <line class="va-axis" x1="${planeOrigin[0]}" y1="115" x2="${planeOrigin[0]}" y2="326"></line>
+          <text class="va-small-label" x="628" y="239">component 1</text>
+          <text class="va-small-label" x="618" y="119">component 2</text>
+          ${basisMarkup}
+          ${vectorMarkup}
+          ${projectionVanishes ? `
+            <circle cx="${planeOrigin[0]}" cy="${planeOrigin[1]}" r="5" fill="var(--foreground)"></circle>
+            <text class="va-small-label" x="541" y="302">${bothVectorsVanish ? 'Both vectors vanish' : 'Projection vanishes in 1–2'}</text>` : `
+            <circle cx="${planeOrigin[0]}" cy="${planeOrigin[1]}" r="3" fill="var(--foreground)"></circle>`}
+          <text class="va-small-label" x="541" y="382">Solid: actual PR and QS projections</text>
+          <text class="va-small-label" x="541" y="402">Dashed: projected intrinsic e₁, e₂</text>`;
+
+        const probe = Array.from({ length: dimension }, () => gaussian(random));
+        const j2Residual = norm(add(applyJ(applyJ(probe)), probe)) / (1 + norm(probe));
+        const isometryResidual = Math.abs(norm(applyJ(probe)) - norm(probe)) / (1 + norm(probe));
+        let edgeLengthGap = 0;
+        let edgeDot = 0;
+        [[a, b], [b, c], [c, d], [d, a]].forEach(([x, y]) => {
+          const u = sub(y, x);
+          const ju = applyJ(u);
+          edgeLengthGap = Math.max(edgeLengthGap, Math.abs(norm(u) - norm(ju)) / (1 + norm(u)));
+          edgeDot = Math.max(edgeDot, Math.abs(dot(u, ju)) / (1 + norm(u) * norm(ju)));
+        });
+        $('#va-high-detail').textContent = `J checks: relative ‖J²v + v‖ ${formatError(j2Residual)}, norm error ${formatError(isometryResidual)}. Edge-square maxima: length error ${formatError(edgeLengthGap)}, normalized |u · Ju| ${formatError(edgeDot)}.`;
+      }
+
+      ['#va-high-dimension', '#va-high-scenario', '#va-high-epsilon'].forEach(selector => {
+        $(selector).addEventListener('change', drawHigh);
+      });
+      $('#va-high-seed').addEventListener('input', drawHigh);
+      $('#va-high-next').addEventListener('click', () => {
+        const input = $('#va-high-seed');
+        input.value = String(Number(input.value) >= 999 ? 1 : Number(input.value) + 1);
+        drawHigh();
+      });
+
+      resetPlanar();
+      drawHigh();
+      setMode('planar');
+    })();
+  </script>
+</div>
+</body>
+</html>

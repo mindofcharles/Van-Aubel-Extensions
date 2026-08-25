@@ -1,0 +1,9 @@
+This repository contains two licensed components:
+
+1. Lean 4 Source Code, Executable Scripts, Interactive Demonstration, and Project Configuration:
+   Licensed under the Apache License, Version 2.0.
+   Full text: see LICENSE_apache-2.0.txt and NOTICE.txt.
+
+2. Mathematical Notes, Research Articles, and Documentation (.md):
+   Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+   Full text: see LICENSE_cc-by-4.0.txt.

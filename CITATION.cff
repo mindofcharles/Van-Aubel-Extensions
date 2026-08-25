@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+
+message: "If you use this work, please cite it using these metadata."
+
+title: "Van-Aubel-Extensions"
+
+type: software
+
+authors:
+  - given-names: "Charles"
+    alias: "mindofcharles"
+    orcid: "https://orcid.org/0009-0005-8326-876X"
+
+abstract: >-
+  A complex-structure formulation of Van Aubel's theorem,
+  with higher-dimensional and complex-affine extensions,
+  edge-operator classification and rigidity,
+  randomized numerical verification, and Lean 4 formalization.
+
+keywords:
+  - "Van Aubel theorem"
+  - "complex structures"
+  - "affine geometry"
+  - "Euclidean geometry"
+  - "Lean"
+  - "formal verification"
+
+repository-code: "https://github.com/mindofcharles/Van-Aubel-Extensions"
+
+version: "0.1.0"
+date-released: "2026-08-25"

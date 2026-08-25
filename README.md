@@ -8,6 +8,8 @@ The mathematical sources of truth for this repository are three completed notes:
 - [Edge-Operator Realizations and Rigidity of the Van Aubel Center Identity](paper/van-aubel-edge-operator-realizations-and-rigidity.md);
 - [Complex-Affine Naturality and Transfer of the Van Aubel Center Construction](paper/van-aubel-complex-affine-naturality-and-transfer.md).
 
+[![DOI](https://zenodo.org/badge/1346334286.svg)](https://doi.org/10.5281/zenodo.22100009)
+
 > [!NOTE]
 > It is still a work in progress, and no work is ever truly complete. I am continuing to refine and improve it. \
 > I also have several new research findings, which I am currently organizing and preparing for release.
@@ -178,7 +180,7 @@ Machine-readable citation metadata, including the author ORCID, is available in 
 
 This repository has two licensed components:
 
-- Lean 4 source code and executable scripts are licensed under the [Apache License 2.0](LICENSE_apache-2.0.txt);
+- Lean 4 Source Code, Executable Scripts, Interactive Demonstration, and Project Configuration are licensed under the [Apache License 2.0](LICENSE_apache-2.0.txt);
 - mathematical notes, research articles, and Markdown documentation are licensed under [Creative Commons Attribution 4.0 International](LICENSE_cc-by-4.0.txt).
 
 See [`LICENSE.txt`](LICENSE.txt) and [`NOTICE.txt`](NOTICE.txt) for the repository-level licensing notice.

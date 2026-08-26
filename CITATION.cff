@@ -4,8 +4,6 @@ message: "If you use this work, please cite it using these metadata."
 
 title: "Van Aubel Extensions"
 
-type: article
-
 authors:
   - given-names: "Charles"
     alias: "mindofcharles"
@@ -30,7 +28,7 @@ repository-code: "https://github.com/mindofcharles/Van-Aubel-Extensions"
 identifiers:
   - type: doi
     value: "10.5281/zenodo.22100009"
-    description: "The concept DOI of this work."
+    description: "The concept DOI for all versions of this work."
 
-version: "0.1.1"
+version: "0.1.2"
 date-released: "2026-08-26"

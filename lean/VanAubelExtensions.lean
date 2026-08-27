@@ -16,13 +16,13 @@ import VanAubelExtensions.Examples
 /-!
 # Van Aubel identities, rigidity, and complex-affine transfer
 
-This is the public umbrella module for the formalization of
+This is the public umbrella module for the Lean checks corresponding to
 `paper/van-aubel-complex-structure-identity.md`,
 `paper/van-aubel-edge-operator-realizations-and-rigidity.md`, and the
 non-categorical content of
 `paper/van-aubel-complex-affine-naturality-and-transfer.md`.
 
-The implementation is organized by mathematical topic under the
+The Lean files are organized by mathematical topic under the
 `VanAubelExtensions/` directory. Importing `VanAubelExtensions` preserves the
 original public entry point and makes every theorem available.
 -/

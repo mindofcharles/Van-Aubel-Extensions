@@ -7,9 +7,11 @@ Authors: mindofcharles
 import VanAubelExtensions.CenterIdentity
 
 /-!
-# The midpoint J-square
+# The midpoint J-parallelogram
 
-Part of the formalization of `paper/van-aubel-complex-structure-identity.md`.
+The algebraic conclusion is a `J`-parallelogram.  It becomes a square when
+`J` is orthogonal and the scalar is a sign.  This file corresponds to
+`paper/van-aubel-complex-structure-identity.md`.
 -/
 
 namespace VanAubelExtensions

@@ -23,7 +23,9 @@ section SquareConstruction
 variable {V E : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V]
   [AddTorsor V E]
 
-/-- The four ordered vertices of a square, including the degenerate case. -/
+/-- Four ordered vertices used by the edge construction.  The structure stores
+the vertices; the square properties follow separately from orthogonality of
+`J` and the condition `ε² = 1`. -/
 @[ext]
 structure EdgeSquare (E : Type*) where
   first : E
@@ -51,7 +53,8 @@ theorem EdgeSquare.map_third {E F : Type*} (f : E → F) (s : EdgeSquare E) :
 theorem EdgeSquare.map_fourth {E F : Type*} (f : E → F) (s : EdgeSquare E) :
     (s.map f).fourth = f s.fourth := rfl
 
-/-- The square erected on the directed edge `X ⟶ Y` using `ε J`. -/
+/-- The edge parallelogram determined by `ε J` on `X ⟶ Y`.  If `ε² = 1`, the
+orthogonality of `J` makes it a square, including the degenerate case `X = Y`. -/
 def squareOnEdge (J : OrthogonalComplexStructure V) (ε : ℝ) (X Y : E) : EdgeSquare E where
   first := X
   second := Y
@@ -163,9 +166,9 @@ theorem squareOnEdge_zero (J : OrthogonalComplexStructure V) (ε : ℝ) (X : E) 
     squareOnEdge J ε X X = degenerateSquare X := by
   ext <;> simp [squareOnEdge, degenerateSquare]
 
-/-- A complex-affine map carries the four vertices of a constructed
-`J`-square to those of the corresponding `K`-square.  The target square may
-be degenerate. -/
+/-- A complex-affine map carries the four vertices of the constructed
+`J`-edge configuration to the corresponding `K`-configuration.  Under the
+signed square hypotheses, the target square may be degenerate. -/
 theorem squareOnEdge_natural
     {W F : Type*} [NormedAddCommGroup W] [InnerProductSpace ℝ W]
     [AddTorsor W F]

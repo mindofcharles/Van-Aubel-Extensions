@@ -2,7 +2,7 @@
 
 ## Abstract
 
-The Van Aubel center construction is a complex-affine operation once a real vector space is equipped with a complex structure. This note develops that observation in three distinct forms. First, individual edge centers and the four-center identity are natural under arbitrary complex-affine maps. Second, every expression built from fixed complex-affine combinations has a coefficient normal form, so universal equality on the complex affine line implies equality in every complex affine space. Third, the construction and identity admit a precise formulation by natural transformations in the category of complex affine spaces. The note also separates algebraic transport from metric preservation and records the geometric, metric, conjugate-linear, incidence, and nonlinear statements that do not follow from the affine-term transfer theorem.
+The Van Aubel center construction is a complex-affine operation once a real vector space is equipped with a complex structure. This note develops that observation in three forms. First, individual edge centers and the four-center identity are natural under arbitrary complex-affine maps. Second, every expression built from fixed complex-affine combinations has a coefficient normal form, so universal equality on the complex affine line implies equality in every complex affine space. Third, the construction and identity can be expressed by natural transformations in the category of complex affine spaces. The note also separates algebraic transport from metric preservation and records the geometric, metric, conjugate-linear, incidence, and nonlinear statements that do not follow from the affine-term transfer theorem.
 
 ---
 

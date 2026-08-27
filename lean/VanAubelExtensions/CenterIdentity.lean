@@ -22,10 +22,13 @@ section LinearIdentity
 
 variable {V : Type*} [AddCommGroup V] [Module ℝ V]
 
-/-- The center of the square erected on the directed edge `X ⟶ Y`.
+/-- The algebraic center formula associated with the directed edge `X ⟶ Y`.
 
 Here points have temporarily been identified with their position vectors.
-The affine version below removes this choice of origin. -/
+The affine version below removes this choice of origin.  When `J` is an
+orthogonal complex structure and `ε² = 1`, this is the center of the
+corresponding square; without those metric hypotheses it is the center of the
+associated edge parallelogram. -/
 def squareCenter (J : V →ₗ[ℝ] V) (ε : ℝ) (X Y : V) : V :=
   (2 : ℝ)⁻¹ • (X + Y + ε • J (Y - X))
 
@@ -58,7 +61,9 @@ section AffineIdentity
 
 variable {V E : Type*} [AddCommGroup V] [Module ℝ V] [AddTorsor V E]
 
-/-- The square center constructed directly in an affine space. -/
+/-- The algebraic edge-center formula constructed directly in an affine
+space.  It becomes a square center under the orthogonal signed hypotheses
+described above. -/
 def affineSquareCenter (J : V →ₗ[ℝ] V) (ε : ℝ) (X Y : E) : E :=
   (2 : ℝ)⁻¹ • ((Y -ᵥ X) + ε • J (Y -ᵥ X)) +ᵥ X
 

@@ -2,7 +2,7 @@
 
 ## 1. Structural Viewpoint
 
-The purpose of this note is not primarily to move Van Aubel's theorem from the plane into a higher-dimensional Euclidean space. The main point is that the familiar planar phenomenon is governed by a more basic algebraic structure.
+This note formulates Van Aubel's theorem in terms of a complex structure on a real vector space. The familiar planar result appears after the algebraic identity is combined with an orthogonal inner-product structure.
 
 Let $V$ be a real vector space and let
 
@@ -57,7 +57,7 @@ $$
 \text{metric consequences}.
 $$
 
-The classical planar theorem is the canonical two-dimensional realization of this structure, rather than the sole setting in which the identity makes sense.
+The classical planar theorem is the two-dimensional Euclidean specialization of this structure; the algebraic identity itself is not restricted to that setting.
 
 ---
 
@@ -593,7 +593,7 @@ To preserve all source distances rather than merely obtain a new metric realizat
 
 The transfer theorem applies only to fixed-coefficient complex-affine identities. Exterior regions, intersection assertions, complex conjugation without additional real structure, norms and angles, and nonlinear operations require separate arguments. For example, in $\mathbb R^4$ the lines $\ell_1=\{te_1:t\in\mathbb R\}$ and $\ell_2=\{e_3+se_2:s\in\mathbb R\}$ have perpendicular direction vectors but are disjoint. For a nonzero edge vector $u$, the relation $J^2=-I$ does at least imply that $u$ and $Ju$ are real-linearly independent: otherwise $Ju=\lambda u$ would give $-u=\lambda^2u$. Thus $J$ selects the real plane $\operatorname{span}\{u,Ju\}$, although its metric and ambient incidence properties are additional data.
 
-Van Aubel's theorem is a particularly clean instance of the transfer viewpoint: its center relation is a fixed-coefficient complex-affine identity, and orthogonality supplies its Euclidean interpretation.
+Van Aubel's theorem is an instance of the transfer viewpoint: its center relation is a fixed-coefficient complex-affine identity, and orthogonality supplies its Euclidean interpretation.
 
 ---
 
@@ -628,4 +628,4 @@ $$
 \boxed{\langle R-P,S-Q\rangle=0}.
 $$
 
-The classical Van Aubel theorem is the canonical planar instance obtained from an oriented Euclidean plane. Higher even-dimensional examples are further realizations of the same complex-structure identity; orthogonality supplies its Euclidean square interpretation and its metric consequences.
+The classical Van Aubel theorem is the planar specialization obtained from an oriented Euclidean plane. Higher even-dimensional examples are further realizations of the same complex-structure identity; orthogonality supplies its Euclidean square interpretation and its metric consequences.

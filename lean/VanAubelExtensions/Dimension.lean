@@ -24,7 +24,8 @@ variable {V : Type*} [AddCommGroup V] [Module ℝ V]
 
 /-- A finite-dimensional real vector space carrying a linear complex
 structure has even dimension.  Orthogonality is not needed for this direction. -/
-theorem finrank_even_of_complexStructure (J : V →ₗ[ℝ] V)
+theorem finrank_even_of_complexStructure [FiniteDimensional ℝ V]
+    (J : V →ₗ[ℝ] V)
     (hJ_sq : ∀ v, J (J v) = -v) : Even (Module.finrank ℝ V) := by
   have hcomp : J.comp J = -(LinearMap.id : V →ₗ[ℝ] V) := by
     ext v

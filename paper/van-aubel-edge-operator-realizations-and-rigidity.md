@@ -535,7 +535,7 @@ The first nonorthogonal exceptional families thus occur in complex dimension two
 
 ## 7. Final Perspective
 
-The universal Van Aubel center relation has a simple but complete realization theory. For a fixed target complex structure $K$, every quadruple of real-linear edge operators producing
+The universal Van Aubel center relation admits the following realization classification. For a fixed target complex structure $K$, every quadruple of real-linear edge operators producing
 
 $$
 R-P=K(S-Q)
@@ -560,4 +560,4 @@ Within this family:
 - orthogonality forces $N=0$ and hence a common complex structure on all four edges;
 - in finite dimensions, nonzero parameters without orthogonality occur from real dimension four onward, while real dimension two remains rigid.
 
-The standard Van Aubel construction is the distinguished common realization $N=0$. The classification identifies precisely which hypotheses make that realization unique and precisely where nonorthogonal alternatives begin.
+The standard Van Aubel construction is the common realization corresponding to $N=0$. The classification states which hypotheses make that realization unique and where nonorthogonal alternatives begin.

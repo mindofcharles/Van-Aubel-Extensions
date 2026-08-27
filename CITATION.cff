@@ -10,10 +10,11 @@ authors:
     orcid: "https://orcid.org/0009-0005-8326-876X"
 
 abstract: >-
-  A complex-structure formulation of Van Aubel's theorem,
-  with higher-dimensional and complex-affine extensions,
-  edge-operator classification and rigidity,
-  randomized numerical verification, and Lean 4 formalization.
+  A mathematical study of Van Aubel's theorem through complex structures,
+  including higher-dimensional realizations, edge-operator classification and rigidity,
+  and complex-affine naturality and transfer.
+  The repository also contains supporting Lean 4 checks,
+  numerical consistency tests, and an interactive demonstration.
 
 keywords:
   - "Van Aubel theorem"
@@ -30,5 +31,5 @@ identifiers:
     value: "10.5281/zenodo.22100009"
     description: "The concept DOI for all versions of this work."
 
-version: "0.1.2"
+version: "0.2.0"
 date-released: "2026-08-26"

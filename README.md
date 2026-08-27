@@ -1,8 +1,12 @@
 # Van Aubel Extensions
 
-A structural formulation of Van Aubel's theorem through complex structures on real vector spaces, together with a Lean 4 formalization, randomized numerical checks, and a self-contained interactive demonstration.
+This repository studies Van Aubel's theorem through complex structures on real vector spaces.
 
-The mathematical sources of truth for this repository are three completed notes:
+The central identity is affine-algebraic; its familiar equal-length and perpendicularity conclusions arise after an orthogonal inner-product structure is added.
+
+## Mathematical notes
+
+The mathematical arguments are presented in three notes:
 
 - [Van Aubel as a Complex-Structure Identity](paper/van-aubel-complex-structure-identity.md);
 - [Edge-Operator Realizations and Rigidity of the Van Aubel Center Identity](paper/van-aubel-edge-operator-realizations-and-rigidity.md);
@@ -11,27 +15,13 @@ The mathematical sources of truth for this repository are three completed notes:
 [![DOI](https://zenodo.org/badge/1346334286.svg)](https://doi.org/10.5281/zenodo.22100009)
 
 > [!NOTE]
-> It is still a work in progress, and no work is ever truly complete. I am continuing to refine and improve it. \
-> I also have several new research findings, which I am currently organizing and preparing for release.
+> This is an evolving research project. Its statements and exposition may be refined as related results are checked and organized.
 
 > [!TIP]
 > If you notice any issues or have any suggestions and have the time, \
 > please leave them in the Issues section. Thank you.
 
-I would like to express my sincere gratitude to **GPT**. **GPT** cross-validated my conclusions, provided many valuable suggestions, and collaborated with me in developing the Lean 4 formalization for this project.
-
-The Lean development formalizes the following results:
-
-- the central identity;
-- the intrinsic affine and vector-coordinate edge-operator classifications;
-- sign, orthogonal, and sharp real-dimension-two rigidity;
-- pairwise-distinct nonorthogonal exceptional families in every complex dimension at least two;
-- complex-affine naturality of centers, full identities, and possibly degenerate squares;
-- metric transport and isometry criteria;
-- recursive complex-affine term normal forms and universal transfer;
-- explicit counterexamples separating algebraic transport from metric preservation.
-
-(The expository category-theory packaging is intentionally outside Lean; all non-categorical theorem and counterexample claims are mirrored.)
+I would like to express my sincere gratitude to **GPT** for cross-checking my mathematical derivations, helping organize them, structuring the mathematical arguments, and developing the Lean files.
 
 ## The central identity
 
@@ -61,7 +51,7 @@ $$
 
 This identity is affine-algebraic and needs only $J^2=-I$.
 
-If $V$ is an inner-product space and $J$ is orthogonal, it immediately gives the metric conclusions:
+If $V$ is an inner-product space and $J$ is orthogonal, it gives the metric conclusions:
 
 $$
 {\lVert R-P\rVert}=\lVert S-Q\rVert, \qquad \langle R-P,S-Q\rangle=0.
@@ -73,25 +63,42 @@ In an oriented Euclidean plane, this specializes to the classical Van Aubel theo
 
 ## Scope and results
 
-The construction and its formalization cover:
+The mathematical development considers:
 
-- arbitrary ordered quadruples, including coincident, collinear, degenerate, and non-coplanar configurations;
-- vector-space and affine-space versions of the center identity;
-- the square construction and its metric consequences for orthogonal complex structures;
-- the classical oriented two-dimensional theorem;
-- the square formed by the side midpoints of the four centers;
-- existence of orthogonal complex structures exactly in even-dimensional finite-dimensional real inner-product spaces;
-- a precise transfer principle for complex-affine coefficient identities;
-- rigidity when independently chosen edge operators are orthogonal;
-- rigidity of independently chosen edge signs on a nonzero real vector space;
-- an explicit nonorthogonal exceptional family in real dimension $4$;
-- concrete higher-dimensional behavior, including perpendicular but disjoint affine lines.
+- arbitrary ordered quadruples, including coincident, collinear, degenerate, and non-coplanar configurations
+- vector-space and affine-space versions of the center identity
+- the square construction and its metric consequences for orthogonal complex structures
+- the classical oriented two-dimensional theorem
+- the $J$-parallelogram formed by the side midpoints of the four centers, which becomes a square in the orthogonal setting
+- existence of orthogonal complex structures exactly in even-dimensional finite-dimensional real inner-product spaces
+- a transfer theorem for complex-affine coefficient identities
+- rigidity when independently chosen edge operators are orthogonal
+- rigidity of independently chosen edge signs on a nonzero real vector space
+- an explicit nonorthogonal exceptional family in real dimension $4$
+- concrete higher-dimensional behavior, including perpendicular but disjoint affine lines
 
 For the central identity, the same operator $J$ and the same sign $\varepsilon$ are used on all four directed edges.
 
 Orthogonality is required only for the equal-length and perpendicularity conclusions, not for the algebraic identity itself.
 
-## Lean formalization
+## Verification and supporting materials
+
+The papers contain the mathematical derivations. The Lean development and the numerical program are supporting checks of those derivations.
+
+### Lean checks
+
+The Lean development provides machine-checked counterparts of the following non-categorical results:
+
+- the central identity
+- the intrinsic affine and vector-coordinate edge-operator classifications
+- sign, orthogonal, and real-dimension-two rigidity
+- pairwise-distinct nonorthogonal exceptional families in every complex dimension at least two
+- complex-affine naturality of centers and identities, including degenerate edge configurations
+- metric transport and isometry criteria
+- recursive complex-affine term normal forms and universal transfer
+- counterexamples separating algebraic transport from metric preservation
+
+The category-theory formulation in the third note is expository and is not included in the Lean development.
 
 The project is pinned to Lean `v4.33.1` and mathlib `v4.33.1`.
 
@@ -102,7 +109,7 @@ cd lean
 lake build
 ```
 
-The public umbrella module preserves a single import path:
+The umbrella module provides a single import path:
 
 ```lean
 import VanAubelExtensions
@@ -126,25 +133,26 @@ The current development builds without `sorry`, `admit`, or project-defined axio
 | --- | --- |
 | [`Basic`](lean/VanAubelExtensions/Basic.lean) | Orthogonal complex structures and their elementary properties |
 | [`CenterIdentity`](lean/VanAubelExtensions/CenterIdentity.lean) | Linear and affine center constructions and the central identity |
-| [`SquareGeometry`](lean/VanAubelExtensions/SquareGeometry.lean) | Squares on directed edges, square naturality and degeneration, target metric re-realization, isometry criteria, and the planar theorem |
+| [`SquareGeometry`](lean/VanAubelExtensions/SquareGeometry.lean) | Edge configurations, their square properties under orthogonal signed hypotheses, naturality and degeneration, target metric re-realization, isometry criteria, and the planar theorem |
 | [`Dimension`](lean/VanAubelExtensions/Dimension.lean) | Standard even-dimensional structures and the dimension characterization |
 | [`Rigidity`](lean/VanAubelExtensions/Rigidity.lean) | Intrinsic affine and vector four-operator parametrizations, complex-structure classification, sign and orthogonal rigidity, and sharp dimension-two rigidity |
-| [`MidpointSquare`](lean/VanAubelExtensions/MidpointSquare.lean) | The derived square formed from center-side midpoints |
+| [`MidpointSquare`](lean/VanAubelExtensions/MidpointSquare.lean) | The derived midpoint $J$-parallelogram and its metric square consequences |
 | [`ComplexAffineTransfer`](lean/VanAubelExtensions/ComplexAffineTransfer.lean) | Complex scalar action, center and identity naturality, recursive affine-term syntax and normal forms, coefficient uniqueness, and universal transfer |
 | [`Examples`](lean/VanAubelExtensions/Examples.lean) | Incidence and metric counterexamples, the pairwise-distinct `ℂ²` exceptional family, and its extension to every complex dimension at least two |
 
 [`lean/VanAubelExtensions.lean`](lean/VanAubelExtensions.lean) imports all of these modules and is the recommended entry point.
 
-## Numerical consistency checks
+### Numerical consistency checks
 
 The NumPy verifier tests both signs, several even dimensions, randomly conjugated orthogonal complex structures, and explicit degenerate configurations.
 
-It checks the vector identity, equality of norms, and orthogonality.
+It checks the vector identity, equality of norms, and orthogonality. Deterministic boundary tests also cover invalid inputs and expected failures for nonorthogonal structures and mixed edge signs.
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r verify/requirements.txt
+python3 -m venv venv
+source venv/bin/activate
+python -m pip install --requirement verify/requirements.txt
+python -m unittest discover --start-directory verify --pattern "test_*.py"
 python verify/verify_van_aubel.py
 ```
 
@@ -158,9 +166,9 @@ python verify/verify_van_aubel.py \
   --tolerance 1e-10
 ```
 
-These randomized checks are supplementary consistency tests, while the Lean development is the formal proof.
+These calculations are supplementary diagnostics rather than proofs.
 
-## Interactive demonstration
+### Interactive demonstration
 
 Open [`simple_demo/van-aubel-multidimensional-lab.html`](simple_demo/van-aubel-multidimensional-lab.html) in a browser.
 
@@ -180,7 +188,7 @@ Machine-readable citation metadata, including the author ORCID, is available in 
 
 This repository has two licensed components:
 
-- Lean 4 Source Code, Executable Scripts, Interactive Demonstration, and Project Configuration are licensed under the [Apache License 2.0](LICENSE_apache-2.0.txt);
+- Lean 4 source code, executable scripts, the interactive demonstration, and project configuration are licensed under the [Apache License 2.0](LICENSE_apache-2.0.txt);
 - mathematical notes, research articles, and Markdown documentation are licensed under [Creative Commons Attribution 4.0 International](LICENSE_cc-by-4.0.txt).
 
 See [`LICENSE.txt`](LICENSE.txt) and [`NOTICE.txt`](NOTICE.txt) for the repository-level licensing notice.

@@ -2,13 +2,13 @@
 
 ## Abstract
 
-The Van Aubel center construction is a complex-affine operation once a real vector space is equipped with a complex structure. This note develops that observation in three forms. First, individual edge centers and the four-center identity are natural under arbitrary complex-affine maps. Second, every expression built from fixed complex-affine combinations has a coefficient normal form, so universal equality on the complex affine line implies equality in every complex affine space. Third, the construction and identity can be expressed by natural transformations in the category of complex affine spaces. The note also separates algebraic transport from metric preservation and records the geometric, metric, conjugate-linear, incidence, and nonlinear statements that do not follow from the affine-term transfer theorem.
+The Van Aubel center construction with one common signed complex structure is a complex-affine operation. This note develops that observation in three forms. First, individual edge centers and the four-center identity are natural under arbitrary complex-affine maps. Second, every expression built from fixed complex-affine combinations has a coefficient normal form, so universal equality on the complex affine line implies equality in every complex affine space. Third, the construction and identity can be expressed by natural transformations in the category of complex affine spaces. The note also separates algebraic transport from metric preservation and records the geometric, metric, conjugate-linear, incidence, and nonlinear statements that do not follow from the affine-term transfer theorem.
 
 ---
 
 ## 1. The Complex-Affine Setting
 
-The underlying center identity and its Euclidean interpretation are developed in [*Van Aubel as a Complex-Structure Identity*](van-aubel-complex-structure-identity.md). The classification of alternative edge-operator realizations is developed separately in [*Edge-Operator Realizations and Rigidity of the Van Aubel Center Identity*](van-aubel-edge-operator-realizations-and-rigidity.md). The present note isolates the naturality and transfer theory common to those realizations.
+The underlying center identity and its Euclidean interpretation are developed in [*Van Aubel as a Complex-Structure Identity*](van-aubel-complex-structure-identity.md). The classification of alternative edge-operator realizations is developed separately in [*Edge-Operator Realizations and Rigidity of the Van Aubel Center Identity*](van-aubel-edge-operator-realizations-and-rigidity.md). The present note develops naturality for the construction using one common complex structure and one common sign on all four edges, together with a transfer theorem for fixed complex-affine terms. Independently chosen edge operators require additional compatibility conditions, as explained in Section 2.
 
 Let $V$ be a real vector space and let
 
@@ -188,13 +188,55 @@ F(X)+\varepsilon K(Tu).
 \end{aligned}
 $$
 
-Thus the edge parallelogram defined by $J$ is carried to the corresponding edge parallelogram defined by $K$. If $K$ is orthogonal and $Tu\neq0$, the image is a $K$-square in the real plane
+Thus the edge parallelogram defined by $J$ is carried to the corresponding edge parallelogram defined by $K$. If $K$ is orthogonal and $Tu\neq0$, the image is a $K$-square in the real affine plane
 
 $$
-\operatorname{span}\{Tu,K(Tu)\}.
+F(X)+\operatorname{span}_{\mathbb R}\{Tu,K(Tu)\}.
 $$
 
 If $Tu=0$, then $F(X)=F(Y)$ and the image degenerates to a single point. If $J$ is orthogonal as well, the source parallelogram is itself a square. Hence a complex-affine map between orthogonal realizations sends each constructed square to a square that may be degenerate, even when the map is not an isometry.
+
+### Scope for independently chosen edge operators
+
+For real-linear edge operators $L:V\to V$ and $L':W\to W$, define
+
+$$
+M_L(X,Y)=X+\frac{(Y-X)+L(Y-X)}{2}.
+$$
+
+The calculation in Theorem 1 gives
+
+$$
+F\bigl(M_L(X,Y)\bigr)=M_{L'}\bigl(F(X),F(Y)\bigr)
+\qquad\text{whenever }TL=L'T.
+$$
+
+For the families parametrized in the companion classification note, let $(J,N)$ and $(K,N')$ denote the source and target data. In addition to $TJ=KT$, the condition
+
+$$
+TN=N'T
+$$
+
+ensures that $T$ intertwines all four corresponding edge operators: in particular, $T(JN)=KN'T$, and the remaining formulas follow by addition and subtraction.
+
+Complex linearity alone does not ensure this compatibility. For example, take $V=W=\mathbb C^2$, $J=K=iI$, and
+
+$$
+N(z_1,z_2)=(\overline{z_2},0),
+\qquad L=J+N,
+\qquad F=T=J.
+$$
+
+Then $TJ=KT$, but $TN=-NT$. If the same edge operator $L$ is used in the source and target, the vector $u=(0,1)$ gives
+
+$$
+F\bigl(M_L(0,u)\bigr)-M_L\bigl(F(0),F(u)\bigr)
+=JNu=(i,0)\neq0.
+$$
+
+The additional intertwining condition identifies transported centers with centers reconstructed from the prescribed target edge operators. An already valid vector relation $R-P=J(S-Q)$ still transports to $F(R)-F(P)=K(F(S)-F(Q))$ using $TJ=KT$ alone.
+
+In the nonzero complex-antilinear exceptional families, those edge centers are not complex-affine terms with fixed scalar coefficients relative to the base complex structure. The coefficient transfer theorem in Section 6 therefore does not automatically apply to expressions involving the additional operator $N$.
 
 ---
 
@@ -315,6 +357,24 @@ $$
 
 is complex-linear and sends every constructed square to a square, but it doubles every nonzero length.
 
+For all image configurations of a given map $F$, it suffices that $K$ be orthogonal on $\operatorname{im}T$ with its inherited inner product. This subspace is $K$-invariant because $K(Tv)=T(Jv)$, and every displacement between image points lies in it. For a single fixed quadruple, the two conclusions only require $|Kw|=|w|$ and $\langle Kw,w\rangle=0$ for the particular vector $w=S'-Q'$.
+
+Orthogonality on the whole target space is necessary if equal opposite-center lengths are required for **every** target quadruple. To see this, choose any origin $O\in E'$ and any vector $w\in W$, and take
+
+$$
+A'=B'=C'=O,
+\qquad D'=O+(I+\varepsilon K)w.
+$$
+
+The center formulas give
+
+$$
+S'-Q'=w,
+\qquad R'-P'=\varepsilon Kw.
+$$
+
+Universal equality of the two lengths therefore forces $|Kw|=|w|$ for every $w\in W$, and real polarization gives orthogonality of $K$. This necessity concerns all target quadruples, including those outside the image of a particular map.
+
 ### 4.3 Preservation of source metric data
 
 To preserve all distances between source points, $T$ must be an isometric embedding:
@@ -377,6 +437,16 @@ TJ_0=KT.
 $$
 
 The source structure $J_0$ is orthogonal, whereas $K=J_2$ is not. Thus complex-affine naturality transports the algebraic construction, but orthogonality in the source alone cannot supply a target-space metric interpretation.
+
+The weaker condition on the image subspace from Section 4.2 can also occur explicitly. Take
+
+$$
+W=\mathbb R^4,
+\qquad K=J_0\oplus J_2,
+\qquad T(x,y)=(x,y,0,0).
+$$
+
+Then $TJ_0=KT$, and $K$ is orthogonal on $\operatorname{im}T$. Hence the image configurations have the square and opposite-center metric properties. However, $K$ is not orthogonal on all of $W$: it sends the unit vector $(0,0,1,0)$ to $(0,0,0,1/2)$.
 
 ---
 
@@ -599,7 +669,7 @@ Theorem 4 applies only to identities genuinely constructed from fixed complex-af
 
 - **Complex conjugation.** A bare complex vector space has no canonical conjugation. Conjugate-linear constructions require additional real-form data or a specified conjugation, together with morphisms that preserve that data.
 
-- **Norms and angles.** Equalities involving norms, inner products, or angles require metric structure. Algebraic transport yields a relation involving the target complex structure, but metric conclusions require that target structure to be orthogonal.
+- **Norms and angles.** Equalities involving norms, inner products, or angles require metric structure. For the center relation, orthogonality of the target complex structure on the relevant invariant subspace supplies equal-length and perpendicularity conclusions, as in Section 4.2.
 
 - **Nonlinear operations.** Normalization, products of input-dependent coordinates, variable ratios, and coefficients determined by the input points are not complex-affine terms with fixed coefficients.
 

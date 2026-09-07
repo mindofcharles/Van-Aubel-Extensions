@@ -373,7 +373,7 @@ $$
 
 ## 6. A Derived $J$-Parallelogram from the Four Centers
 
-The main identity produces another natural algebraic configuration that is not part of the original construction. Its Euclidean square interpretation requires the additional assumption that $J$ is orthogonal.
+The main identity produces another natural algebraic configuration that is not part of the original construction. If $J$ is orthogonal, this configuration is a Euclidean square, possibly degenerate.
 
 Let $U_1,U_2,U_3,U_4$ be the midpoints of the four successive sides of the center quadrilateral $PQRS$:
 
@@ -574,7 +574,9 @@ Structural induction gives existence. If two such expressions agree for every in
 
 The pointwise naturality theorem, the full normal-form proof, the distinction between algebraic transport and metric preservation, the limits of the transfer method, and the categorical formulation in $\mathbf{CAff}$ are developed in the companion note [*Complex-Affine Naturality and Transfer of the Van Aubel Center Construction*](van-aubel-complex-affine-naturality-and-transfer.md).
 
-Metric conclusions still require separate hypotheses. In the target, $K$ must be orthogonal to turn the transported $K$-relation into equal-length and perpendicularity statements. The relation $J^2=-I$ alone is insufficient: for $a>0$ with $a\neq1$,
+Metric conclusions still require separate hypotheses. Orthogonality of $K$ on the target translation space $W$ is sufficient for equal-length and perpendicularity conclusions. For configurations in the image of a given map $F$, it suffices that $K$ be orthogonal on the $K$-invariant subspace $\operatorname{im}T$. Orthogonality on all of $W$ is necessary if equal opposite-center lengths are required for every target quadruple; the companion note proves this distinction in Section 4.2.
+
+The relation $J^2=-I$ alone is insufficient: for $a>0$ with $a\neq1$,
 
 $$
 J_a(x,y)=(-ay,x/a)

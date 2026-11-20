@@ -4,6 +4,10 @@ This repository studies Van Aubel's theorem through complex structures on real v
 
 The central identity is affine-algebraic; its familiar equal-length and perpendicularity conclusions arise after an orthogonal inner-product structure is added.
 
+## Acknowledgements
+
+> I would like to express my sincere gratitude to **GPT** for cross-checking my mathematical derivations, helping organize them, structuring the mathematical arguments, and developing the Lean files.
+
 ## Mathematical notes
 
 The mathematical arguments are presented in three notes:
@@ -20,8 +24,6 @@ The mathematical arguments are presented in three notes:
 > [!TIP]
 > If you notice any issues or have any suggestions and have the time, \
 > please leave them in the Issues section. Thank you.
-
-I would like to express my sincere gratitude to **GPT** for cross-checking my mathematical derivations, helping organize them, structuring the mathematical arguments, and developing the Lean files.
 
 ## The central identity
 
@@ -75,6 +77,10 @@ The mathematical development considers:
 - rigidity when independently chosen edge operators are orthogonal
 - rigidity of independently chosen edge signs on a nonzero real vector space
 - an explicit nonorthogonal exceptional family in real dimension $4$
+- configuration-dependent operator defects and all sixteen mixed-sign loci, including their dimensions and measure-zero property
+- a common-edge-operator characterization that singles out signed square operators among fixed directly similar planar parallelograms
+- rank and unitary normal forms of square-zero antilinear exceptional parameters
+- exact real operator norms and active-vector length distortion for the four exceptional edge structures
 - concrete higher-dimensional behavior, including perpendicular but disjoint affine lines
 
 For the central identity, the same operator $J$ and the same sign $\varepsilon$ are used on all four directed edges.
@@ -93,6 +99,12 @@ The Lean development provides machine-checked counterparts of the following non-
 - the intrinsic affine and vector-coordinate edge-operator classifications
 - sign, orthogonal, and real-dimension-two rigidity
 - pairwise-distinct nonorthogonal exceptional families in every complex dimension at least two
+- intrinsic affine and vector cyclic defects, all sixteen mixed-sign conditions, and their connection with actual center configurations
+- mixed-sign locus surjectivity, complex dimensions, real codimension, and zero mass under measures absolutely continuous with respect to Lebesgue measure
+- the common-edge-operator characterization and its signed-square specialization
+- square-zero antilinear rank bounds, rank normal forms, complex-linear conjugacy, and realization of every admissible rank
+- unitary normal forms, uniqueness of the positive singular-value multiset, and unitary conjugacy classification
+- active-vector length distortion and the exact real operator norm of every exceptional edge operator
 - complex-affine naturality of centers and identities, including degenerate edge configurations
 - metric transport and isometry criteria
 - recursive complex-affine term normal forms and universal transfer
@@ -123,9 +135,23 @@ import VanAubelExtensions
 #check VanAubelExtensions.universalOperatorIdentity_rigidity_of_finrank_two
 #check VanAubelExtensions.ComplexAffineTerm.evalAffine_transfer_from_affineComplexLine
 #check VanAubelExtensions.exceptional_family_in_every_complex_dimension_ge_two
+#check VanAubelExtensions.affineOperatorDefect_cyclic
+#check VanAubelExtensions.mixedSigns_centerIdentity_iff
+#check VanAubelExtensions.mismatchLocus_finrank
+#check VanAubelExtensions.AntilinearMap.exists_rank_normalForm
+#check VanAubelExtensions.AntilinearMap.unitary_conjugate_iff
+#check VanAubelExtensions.exceptionalEdgeReal_norm
 ```
 
 The current development builds without `sorry`, `admit`, or project-defined axioms.
+
+To inspect the transitive axiom dependencies of the headline theorems, run the maintained audit from the `lean/` directory:
+
+```bash
+lake env lean CheckAxioms.lean
+```
+
+[`lean/CheckAxioms.lean`](lean/CheckAxioms.lean) covers the foundational identity and the classification, mixed-sign, normal-form, measure, and metric results. The expanded operator paper includes a theorem-by-theorem correspondence table.
 
 ### Module guide
 
@@ -138,6 +164,15 @@ The current development builds without `sorry`, `admit`, or project-defined axio
 | [`Rigidity`](lean/VanAubelExtensions/Rigidity.lean) | Intrinsic affine and vector four-operator parametrizations, complex-structure classification, sign and orthogonal rigidity, and sharp dimension-two rigidity |
 | [`MidpointSquare`](lean/VanAubelExtensions/MidpointSquare.lean) | The derived midpoint $J$-parallelogram and its metric square consequences |
 | [`ComplexAffineTransfer`](lean/VanAubelExtensions/ComplexAffineTransfer.lean) | Complex scalar action, center and identity naturality, recursive affine-term syntax and normal forms, coefficient uniqueness, and universal transfer |
+| [`ComplexStructureSpace`](lean/VanAubelExtensions/ComplexStructureSpace.lean) | The complex module induced by a real complex structure, and the antilinear-map bridge |
+| [`OperatorDefect`](lean/VanAubelExtensions/OperatorDefect.lean) | Vector and intrinsic affine cyclic defects, common-operator characterization, and signed-square specialization |
+| [`MixedSigns`](lean/VanAubelExtensions/MixedSigns.lean) | Sign encoding, the sixteen-case table, center-defect correspondence, locus maps, dimensions, and real codimension |
+| [`MixedSignMeasure`](lean/VanAubelExtensions/MixedSignMeasure.lean) | Zero Haar measure of nonempty mismatch loci and the absolutely continuous measure consequence |
+| [`ExceptionalNormalForms`](lean/VanAubelExtensions/ExceptionalNormalForms.lean) | Antilinear rank bounds, adapted coordinate models, complex-linear conjugacy classification, and every admissible rank |
+| [`ExceptionalMetric`](lean/VanAubelExtensions/ExceptionalMetric.lean) | Conjugate Hermitian spaces, positive singular bases, and existence of a full unitary adapted basis |
+| [`ExceptionalUnitaryClassification`](lean/VanAubelExtensions/ExceptionalUnitaryClassification.lean) | Gram spectrum, uniqueness of the positive coefficient multiset, and unitary conjugacy classification |
+| [`ShearNorm`](lean/VanAubelExtensions/ShearNorm.lean) | Sharp real and complex scalar shear estimates |
+| [`ExceptionalNorm`](lean/VanAubelExtensions/ExceptionalNorm.lean) | Exact real operator norms, unit phases, and active-vector length distortion of exceptional edge structures |
 | [`Examples`](lean/VanAubelExtensions/Examples.lean) | Incidence and metric counterexamples, the pairwise-distinct `ℂ²` exceptional family, and its extension to every complex dimension at least two |
 
 [`lean/VanAubelExtensions.lean`](lean/VanAubelExtensions.lean) imports all of these modules and is the recommended entry point.

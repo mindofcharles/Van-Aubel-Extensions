@@ -11,10 +11,19 @@ import VanAubelExtensions.Dimension
 import VanAubelExtensions.Rigidity
 import VanAubelExtensions.MidpointSquare
 import VanAubelExtensions.ComplexAffineTransfer
+import VanAubelExtensions.ComplexStructureSpace
+import VanAubelExtensions.OperatorDefect
+import VanAubelExtensions.MixedSigns
+import VanAubelExtensions.MixedSignMeasure
+import VanAubelExtensions.ExceptionalNormalForms
+import VanAubelExtensions.ExceptionalMetric
+import VanAubelExtensions.ExceptionalUnitaryClassification
+import VanAubelExtensions.ShearNorm
+import VanAubelExtensions.ExceptionalNorm
 import VanAubelExtensions.Examples
 
 /-!
-# Van Aubel identities, rigidity, and complex-affine transfer
+# Van Aubel identities, defects, rigidity, normal forms, and complex-affine transfer
 
 This is the public umbrella module for the Lean checks corresponding to
 `paper/van-aubel-complex-structure-identity.md`,

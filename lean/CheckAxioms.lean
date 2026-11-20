@@ -1,0 +1,42 @@
+/-
+Copyright (c) 2026 mindofcharles. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: mindofcharles
+-/
+
+import VanAubelExtensions
+
+/-!
+# Axiom audit for the public mathematical statements
+
+Run `lake env lean CheckAxioms.lean` from the Lean project directory.
+The output lists the transitive axiom dependencies of each headline theorem.
+-/
+
+#print axioms VanAubelExtensions.vanAubelIdentity
+#print axioms VanAubelExtensions.affineUniversalOperatorIdentity_iff_parametrized
+#print axioms VanAubelExtensions.parametrized_all_complexStructures_iff
+#print axioms VanAubelExtensions.universalOperatorIdentity_sign_iff
+#print axioms VanAubelExtensions.orthogonalOperatorIdentity_rigidity
+#print axioms VanAubelExtensions.universalOperatorIdentity_rigidity_of_finrank_two
+#print axioms VanAubelExtensions.affineOperatorDefect_cyclic
+#print axioms VanAubelExtensions.mismatchOfSign_bit
+#print axioms VanAubelExtensions.affineOperatorDefect_mixedSigns
+#print axioms VanAubelExtensions.mixedSigns_centerIdentity_iff
+#print axioms VanAubelExtensions.mismatchPointLocusMap_eq_operatorDefect
+#print axioms VanAubelExtensions.mismatchLocus_finrank
+#print axioms VanAubelExtensions.mismatchPointLocus_finrank
+#print axioms VanAubelExtensions.mismatchLocus_real_codimension
+#print axioms VanAubelExtensions.mismatchPointLocus_absolutelyContinuous_zero
+#print axioms VanAubelExtensions.affineUniversalCommonOperatorIdentity_iff
+#print axioms VanAubelExtensions.similarParallelogram_complexStructure_iff
+#print axioms VanAubelExtensions.AntilinearMap.rank_bound
+#print axioms VanAubelExtensions.AntilinearMap.exists_rank_normalForm
+#print axioms VanAubelExtensions.AntilinearMap.conjugate_iff_rank_eq
+#print axioms VanAubelExtensions.exists_squareZero_antilinear_of_rank
+#print axioms VanAubelExtensions.real_exceptional_rank_normalForm
+#print axioms VanAubelExtensions.AntilinearMap.exists_unitaryNormalForm
+#print axioms VanAubelExtensions.ExceptionalUnitaryNormalForm.coefficientValues_unique
+#print axioms VanAubelExtensions.AntilinearMap.unitary_conjugate_iff
+#print axioms VanAubelExtensions.exceptionalEdgeReal_active_norm_sq
+#print axioms VanAubelExtensions.exceptionalEdgeReal_norm

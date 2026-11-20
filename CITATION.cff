@@ -12,8 +12,10 @@ authors:
 abstract: >-
   A mathematical study of Van Aubel's theorem through complex structures,
   including higher-dimensional realizations, edge-operator classification and rigidity,
-  and complex-affine naturality and transfer.
-  The repository also contains supporting Lean 4 checks,
+  configuration-dependent defects and mixed-sign loci, rank and unitary normal forms
+  of square-zero antilinear maps, exact real operator norms for exceptional edge
+  structures, and complex-affine naturality and transfer.
+  The repository also contains Lean 4 formal proofs,
   numerical consistency tests, and an interactive demonstration.
 
 keywords:
@@ -21,6 +23,10 @@ keywords:
   - "complex structures"
   - "affine geometry"
   - "Euclidean geometry"
+  - "mixed-sign loci"
+  - "antilinear maps"
+  - "normal forms"
+  - "operator norms"
   - "Lean"
   - "formal verification"
 
@@ -31,5 +37,5 @@ identifiers:
     value: "10.5281/zenodo.22100009"
     description: "The concept DOI for all versions of this work."
 
-version: "0.2.0"
-date-released: "2026-08-26"
+version: "0.3.0"
+date-released: "2026-11-20"
